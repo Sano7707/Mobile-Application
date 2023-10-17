@@ -1,4 +1,4 @@
-package HW1
+package com.mycompany.myapp.homework1
 
 
 import java.text.SimpleDateFormat
@@ -10,15 +10,13 @@ fun main(){
   val list = listOf(1,8,27,64,125,216)
 
   println("Items of array")
-    for (item in array){
-      print(item)
-      print(" ")
+    for(item in array){
+      print("$item ")
   }
     println()
     println("Items of list")
-    for(i in list.indices){
-        print(list[i])
-        print(" ")
+    for(item in list){
+        print("$item ")
     }
 
   println()
@@ -26,13 +24,15 @@ fun main(){
   //Exercise 2
     var myString = "Hello World";
     myString +=  " from Kotlin ";
-    myString += myString.substring(0,myString.indexOf('o')+1)
-    myString += myString.substring(0,myString.indexOf('o')+1).uppercase() +" " + myString.substring(0,myString.indexOf('o')+1).lowercase()
+    myString += myString.substring(0,5)
+    myString += myString.substring(0,5).uppercase() +
+            " " + myString.substring(0,5).lowercase()
     println(myString)
 
   println()
   //Exercise 3
-  val myMap = mapOf("Calculus" to "A", "Linear Algebra" to "A-","Discrete" to "B", "Intro to CS" to "B+", "Mobile Application Development" to "A+")
+  val myMap = mapOf("Calculus" to "A", "Linear Algebra" to "A-","Discrete" to "B",
+    "Intro to CS" to "B+", "Mobile Application Development" to "A+")
   for (entry in myMap.entries){
     print("Key is " + entry.key + " Value is " + entry.value)
     println()
@@ -78,7 +78,8 @@ fun main(){
 }
 
 fun isPositive(integer: Int) : String {
-  return if(integer > 0) "$integer is positive"  else if(integer == 0 ) "$integer is zero" else "$integer is negative"
+  return if(integer > 0) "$integer is positive"  else if(integer == 0 )
+    "$integer is zero" else "$integer is negative"
 }
 
 fun greeting(){
@@ -89,26 +90,16 @@ fun greeting(){
   println("Hi $name , you are $age years old.")
 }
 
-class DivisionByZeroException : Exception ("Cannot Divide Number by 0")
 fun carefulDivision(num1 : Int, num2:Int) {
   try{
-    if(num2 == 0) throw DivisionByZeroException()
-    val result = num1.toDouble() / num2
-    println("$num1 / $num2 is $result")
-  }
-  catch (e : DivisionByZeroException){
-    println(e.message)
-  }
-}
-
-open class Person(val name:String, val age : Int) { }
-
-class ExtendedPerson(name: String, age: Int) : Person(name, age) {
-  fun lifeStage(): String {
-    return when (age) {
-      in 0..12 -> "$name is Child"
-      in 13..19 -> "$name is Teenager"
-      else -> "$name is Adult"
+    if(num2 == 0) {
+      val result = num1 / num2
     }
+    else{
+      println("$num1 / $num2 is ${num1.toDouble()/num2}")
+    }
+  }
+  catch (e : ArithmeticException){
+    println(e.message)
   }
 }
